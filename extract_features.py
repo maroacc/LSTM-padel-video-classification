@@ -18,11 +18,11 @@ from extractor import Extractor
 from tqdm import tqdm
 
 # Set defaults.
-seq_length = 40
-class_limit = None  # Number of classes to extract. Can be 1-101 or None for all.
+seq_length = 190
+class_limit = 2  # Number of classes to extract. Can be 1-101 or None for all.
 
 # Get the dataset.
-data = DataSet(seq_length=seq_length, class_limit=class_limit)
+data = DataSet(seq_length=seq_length, class_limit=class_limit, image_shape=(720, 1280, 3))
 
 # get the model.
 model = Extractor()

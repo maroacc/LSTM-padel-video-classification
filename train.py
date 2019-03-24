@@ -66,7 +66,7 @@ def train(data_type, seq_length, model, saved_model=None,
             batch_size=batch_size,
             validation_data=(X_test, y_test),
             verbose=1,
-            callbacks=[tb, early_stopper, csv_logger],
+            callbacks=[tb, early_stopper, csv_logger, checkpointer],
             epochs=nb_epoch)
     else:
         # Use fit generator.
@@ -87,8 +87,8 @@ def main():
     model = 'lstm'
     saved_model = None  # None or weights file
     class_limit = None  # int, can be 1-101 or None
-    seq_length = 40
-    load_to_memory = False  # pre-load the sequences into memory
+    seq_length = 190
+    load_to_memory = True # False  # pre-load the sequences into memory
     batch_size = 32
     nb_epoch = 1000
 

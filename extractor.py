@@ -12,8 +12,10 @@ class Extractor():
         self.weights = weights  # so we can check elsewhere which model
 
         if weights is None:
+            input_tensor = Input(shape=(720, 1280, 3))
             # Get model with pretrained weights.
             base_model = InceptionV3(
+                input_tensor=input_tensor,
                 weights='imagenet',
                 include_top=True
             )
@@ -37,7 +39,8 @@ class Extractor():
             self.model.layers[-1].outbound_nodes = []
 
     def extract(self, image_path):
-        img = image.load_img(image_path, target_size=(299, 299))
+        #img = image.load_img(image_path, target_size=(299, 299))
+        img = image.load_img(image_path)
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
@@ -53,3 +56,22 @@ class Extractor():
             features = features[0]
 
         return features
+
+    def extract1(self, img):
+        #img = image.load_img(image_path, target_size=(299, 299))
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+        x = preprocess_input(x)
+
+        # Get the prediction.
+        features = self.model.predict(x)
+
+        if self.weights is None:
+            # For imagenet/default network:
+            features = features[0]
+        else:
+            # For loaded network:
+            features = features[0]
+
+        return features
+
