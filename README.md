@@ -27,6 +27,8 @@ Video classification example with Inception and LSTM:
 
 `	$ python clasify.py 75 2 lstm-features.hdf5 video_file.mp4`
 
+The result will be placed in result.avi file.
+
 ## Requirements
 
 This code requires you have Keras 2 and TensorFlow 1 or greater installed. Please see the `requirements.txt` file. To ensure you're up to date, run:

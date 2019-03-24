@@ -17,9 +17,11 @@ else:
     exit (1)
 
 capture = cv2.VideoCapture(os.path.join(video_file))
-
 width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)   # float
 height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT) # float
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+video_writer = cv2.VideoWriter("result.avi", fourcc, 15, (int(width), int(height)))
 
 # Get the dataset.
 data = DataSet(seq_length=seq_length, class_limit=class_limit, image_shape=(height, width, 3))
@@ -39,7 +41,6 @@ while True:
     # Save each frame of the video to a list
     frame_count += 1
     frames.append(frame)
-    print('frame_count :{0}'.format(frame_count))
 
     if frame_count < seq_length:
         continue # capture frames untill you get the required number for sequence
@@ -52,11 +53,17 @@ while True:
         features = extract_model.extract_image(image)
         sequence.append(features)
 
-    frames = []
-
     # Clasify sequence
     prediction = saved_LSTM_model.predict(np.expand_dims(sequence, axis=0))
     print(prediction)
-    data.print_class_from_prediction(np.squeeze(prediction, axis=0))
+    values = data.print_class_from_prediction(np.squeeze(prediction, axis=0))
 
-    #break
+    # Add prediction to frames and write them to new video
+    for image in frames:
+        for i in range(len(values)):
+            cv2.putText(image, values[i], (40, 40 * i + 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
+        video_writer.write(image)
+
+    frames = []
+
+video_writer.release()
