@@ -100,6 +100,10 @@ def main():
     if not os.path.exists(sequences_dir):
         os.mkdir(sequences_dir)
 
+    checkpoints_dir = os.path.join('data', 'checkpoints')
+    if not os.path.exists(checkpoints_dir):
+        os.mkdir(checkpoints_dir)
+
     # model can be only 'lstm'
     model = 'lstm'
     saved_model = None  # None or weights file
@@ -110,9 +114,9 @@ def main():
     image_shape = (image_height, image_width, 3)
 
     extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape)
-#    train(data_type, seq_length, model, saved_model=saved_model,
-#          class_limit=class_limit, image_shape=image_shape,
-#          load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
+    train(data_type, seq_length, model, saved_model=saved_model,
+          class_limit=class_limit, image_shape=image_shape,
+          load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
 
 if __name__ == '__main__':
     main()

@@ -26,26 +26,11 @@ class Extractor():
         )
 
     def extract(self, image_path):
-        #img = image.load_img(image_path, target_size=(299, 299))
         img = image.load_img(image_path)
-        x = image.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
-        x = preprocess_input(x)
 
-        # Get the prediction.
-        features = self.model.predict(x)
+        return self.extract_image(img)
 
-        if self.weights is None:
-            # For imagenet/default network:
-            features = features[0]
-        else:
-            # For loaded network:
-            features = features[0]
-
-        return features
-
-    def extract1(self, img):
-        #img = image.load_img(image_path, target_size=(299, 299))
+    def extract_image(self, img):
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
