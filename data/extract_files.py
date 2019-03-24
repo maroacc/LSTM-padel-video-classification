@@ -7,9 +7,10 @@ import csv
 import glob
 import os
 import os.path
+import sys
 from subprocess import call
 
-def extract_files():
+def extract_files(extenssion='mp4'):
     """After we have all of our videos split between train and test, and
     all nested within folders representing their classes, we need to
     make a data file that we can reference when training our RNN(s).
@@ -31,7 +32,7 @@ def extract_files():
         class_folders = glob.glob(os.path.join(folder, '*'))
 
         for vid_class in class_folders:
-            class_files = glob.glob(os.path.join(vid_class, '*.avi'))
+            class_files = glob.glob(os.path.join(vid_class, '*.' + extenssion))
 
             for video_path in class_files:
                 # Get the parts of the file.
@@ -92,7 +93,11 @@ def main():
 
     [train|test], class, filename, nb frames
     """
-    extract_files()
+    if (len(sys.argv) == 2):
+        extract_files(sys.argv[1])
+    else:
+        print ("Usage: python extract_filese.py [videos extession]")
+        print ("Example: python extract_files.py mp4")
 
 if __name__ == '__main__':
     main()
