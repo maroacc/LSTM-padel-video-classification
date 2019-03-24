@@ -4,11 +4,11 @@ Video classification example with Inception and LSTM:
 
 1. Place the videos from your dataset in data/train and data/test folders. Each video type should have its own folder
 
->	| data\test
+>	| data/test
 > >		| Football
 > >		| Commercial
 > >		...
->	| data\train
+>	| data/train
 > >		| Football
 > >		| Commertial
 > >		...
