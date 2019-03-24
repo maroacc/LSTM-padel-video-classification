@@ -5,13 +5,13 @@ Video classification example with Inception and LSTM:
 1. Place the videos from your dataset in data/train and data/test folders. Each video type should have its own folder
 
 >	| data\test
->		| Football
->		| Commercial
->		...
+> >		| Football
+> >		| Commercial
+> >		...
 >	| data\train
->		| Football
->		| Commertial
->		...`
+> >		| Football
+> >		| Commertial
+> >		...
 
 1. Extract files from video with script extract_files.py. Pass video files extenssion as a param
 
