@@ -5,38 +5,25 @@ from keras.layers import Input
 import numpy as np
 
 class Extractor():
-    def __init__(self, weights=None):
+    def __init__(self, image_shape=(299, 299, 3), weights=None):
         """Either load pretrained from imagenet, or load our saved
         weights from our own training."""
 
         self.weights = weights  # so we can check elsewhere which model
 
-        if weights is None:
-            input_tensor = Input(shape=(720, 1280, 3))
-            # Get model with pretrained weights.
-            base_model = InceptionV3(
-                input_tensor=input_tensor,
-                weights='imagenet',
-                include_top=True
-            )
+        input_tensor = Input(image_shape)
+        # Get model with pretrained weights.
+        base_model = InceptionV3(
+            input_tensor=input_tensor,
+            weights='imagenet',
+            include_top=True
+        )
 
-            # We'll extract features at the final pool layer.
-            self.model = Model(
-                inputs=base_model.input,
-                outputs=base_model.get_layer('avg_pool').output
-            )
-
-        else:
-            # Load the model first.
-            self.model = load_model(weights)
-
-            # Then remove the top so we get features not predictions.
-            # From: https://github.com/fchollet/keras/issues/2371
-            self.model.layers.pop()
-            self.model.layers.pop()  # two pops to get to pool layer
-            self.model.outputs = [self.model.layers[-1].output]
-            self.model.output_layers = [self.model.layers[-1]]
-            self.model.layers[-1].outbound_nodes = []
+        # We'll extract features at the final pool layer.
+        self.model = Model(
+            inputs=base_model.input,
+            outputs=base_model.get_layer('avg_pool').output
+        )
 
     def extract(self, image_path):
         #img = image.load_img(image_path, target_size=(299, 299))

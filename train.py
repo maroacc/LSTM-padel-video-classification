@@ -1,11 +1,13 @@
 """
-Train our RNN on extracted features or images.
+Train our LSTM on extracted features.
 """
 from keras.callbacks import TensorBoard, ModelCheckpoint, EarlyStopping, CSVLogger
 from models import ResearchModels
 from data import DataSet
+from extract_features import extract_features
 import time
 import os.path
+import sys
 
 def train(data_type, seq_length, model, saved_model=None,
           class_limit=None, image_shape=None,
@@ -83,28 +85,34 @@ def train(data_type, seq_length, model, saved_model=None,
 def main():
     """These are the main training settings. Set each before running
     this file."""
-    # model can be one of lstm, lrcn, mlp, conv_3d, c3d
+
+    if (len(sys.argv) == 5):
+        seq_length = int(sys.argv[1])
+        class_limit = int(sys.argv[2])
+        image_height = int(sys.argv[3])
+        image_width = int(sys.argv[4])
+    else:
+        print ("Usage: python train.py sequence_length class_limit image_height image_width")
+        print ("Example: python train.py 75 2 720 1280")
+        exit (1)
+
+    sequences_dir = os.path.join('data', 'sequences')
+    if not os.path.exists(sequences_dir):
+        os.mkdir(sequences_dir)
+
+    # model can be only 'lstm'
     model = 'lstm'
     saved_model = None  # None or weights file
-    class_limit = None  # int, can be 1-101 or None
-    seq_length = 190
-    load_to_memory = True # False  # pre-load the sequences into memory
+    load_to_memory = False # pre-load the sequences into memory
     batch_size = 32
     nb_epoch = 1000
+    data_type = 'features'
+    image_shape = (image_height, image_width, 3)
 
-    # Chose images or features and image shape based on network.
-    if model in ['conv_3d', 'c3d', 'lrcn']:
-        data_type = 'images'
-        image_shape = (80, 80, 3)
-    elif model in ['lstm', 'mlp']:
-        data_type = 'features'
-        image_shape = None
-    else:
-        raise ValueError("Invalid model. See train.py for options.")
-
-    train(data_type, seq_length, model, saved_model=saved_model,
-          class_limit=class_limit, image_shape=image_shape,
-          load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
+    extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape)
+#    train(data_type, seq_length, model, saved_model=saved_model,
+#          class_limit=class_limit, image_shape=image_shape,
+#          load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
 
 if __name__ == '__main__':
     main()
