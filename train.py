@@ -64,14 +64,14 @@ def train(data_type, seq_length, model, saved_model=None,
     # Fit!
     if load_to_memory:
         # Use standard fit.
-        rm.model.fit(
-            X,
-            y,
-            batch_size=batch_size,
-            validation_data=(X_test, y_test),
-            verbose=1,
-            callbacks=[tb, early_stopper, csv_logger, checkpointer],
-            epochs=nb_epoch)
+        # rm.model.fit(
+        #     X,
+        #     y,
+        #     batch_size=batch_size,
+        #     validation_data=(X_test, y_test),
+        #     verbose=1,
+        #     callbacks=[tb, early_stopper, csv_logger, checkpointer],
+        #     epochs=nb_epoch)
     else:
         # Use fit generator.
         rm.model.fit_generator(
@@ -81,7 +81,7 @@ def train(data_type, seq_length, model, saved_model=None,
            verbose=1,
            callbacks=[tb, early_stopper, csv_logger, checkpointer],
            validation_data=val_generator,
-           validation_steps=40),
+           validation_steps=40,
            workers=4)
 
         #     history = rm.model.fit(
