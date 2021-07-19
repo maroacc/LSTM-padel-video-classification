@@ -247,98 +247,98 @@ class DataSet():
 
             yield np.array(X), np.array(y)
 
-        def build_image_sequence(self, frames):
-            """Given a set of frames (filenames), build our sequence."""
-            return [process_image(x, self.image_shape) for x in frames]
+    def build_image_sequence(self, frames):
+        """Given a set of frames (filenames), build our sequence."""
+        return [process_image(x, self.image_shape) for x in frames]
 
-        def get_extracted_sequence(self, data_type, sample):
-            """Get the saved extracted features."""
-            filename = sample[2]
-            #print(f'filename: {filename}')
-            path = os.path.join(self.sequence_path, filename + '-' + str(self.seq_length) + \
-                '-' + data_type + '.npy')
-            #print(f'path: {path}')
-            if os.path.isfile(path):
-                return np.load(path)
-            else:
-                return None
+    def get_extracted_sequence(self, data_type, sample):
+        """Get the saved extracted features."""
+        filename = sample[2]
+        #print(f'filename: {filename}')
+        path = os.path.join(self.sequence_path, filename + '-' + str(self.seq_length) + \
+            '-' + data_type + '.npy')
+        #print(f'path: {path}')
+        if os.path.isfile(path):
+            return np.load(path)
+        else:
+            return None
 
-        def get_frames_by_filename(self, filename, data_type):
-            """Given a filename for one of our samples, return the data
-            the model needs to make predictions."""
-            # First, find the sample row.
-            sample = None
-            for row in self.data:
-                if row[2] == filename:
-                    sample = row
-                    break
-            if sample is None:
-                raise ValueError("Couldn't find sample: %s" % filename)
+    def get_frames_by_filename(self, filename, data_type):
+        """Given a filename for one of our samples, return the data
+        the model needs to make predictions."""
+        # First, find the sample row.
+        sample = None
+        for row in self.data:
+            if row[2] == filename:
+                sample = row
+                break
+        if sample is None:
+            raise ValueError("Couldn't find sample: %s" % filename)
 
-            if data_type == "images":
-                # Get and resample frames.
-                frames = self.get_frames_for_sample(sample)
-                frames = self.rescale_list(frames, self.seq_length)
-                # Build the image sequence
-                sequence = self.build_image_sequence(frames)
-            else:
-                # Get the sequence from disk.
-                sequence = self.get_extracted_sequence(data_type, sample)
+        if data_type == "images":
+            # Get and resample frames.
+            frames = self.get_frames_for_sample(sample)
+            frames = self.rescale_list(frames, self.seq_length)
+            # Build the image sequence
+            sequence = self.build_image_sequence(frames)
+        else:
+            # Get the sequence from disk.
+            sequence = self.get_extracted_sequence(data_type, sample)
 
-                if sequence is None:
-                    raise ValueError("Can't find sequence. Did you generate them?")
+            if sequence is None:
+                raise ValueError("Can't find sequence. Did you generate them?")
 
-            return sequence
+        return sequence
 
-        @staticmethod
-        def get_frames_for_sample(sample):
-            """Given a sample row from the data file, get all the corresponding frame
-            filenames."""
-            path = os.path.join('/content/drive/MyDrive/cnn/data', sample[0], sample[1])
-            filename = sample[2]
-            images = sorted(glob.glob(os.path.join(path, filename + '*jpg')))
-            return images
+    @staticmethod
+    def get_frames_for_sample(sample):
+        """Given a sample row from the data file, get all the corresponding frame
+        filenames."""
+        path = os.path.join('/content/drive/MyDrive/cnn/data', sample[0], sample[1])
+        filename = sample[2]
+        images = sorted(glob.glob(os.path.join(path, filename + '*jpg')))
+        return images
 
-        @staticmethod
-        def get_filename_from_image(filename):
-            parts = filename.split(os.path.sep)
-            return parts[-1].replace('.jpg', '')
+    @staticmethod
+    def get_filename_from_image(filename):
+        parts = filename.split(os.path.sep)
+        return parts[-1].replace('.jpg', '')
 
-        @staticmethod
-        def rescale_list(input_list, size):
-            """Given a list and a size, return a rescaled/samples list. For example,
-            if we want a list of size 5 and we have a list of size 25, return a new
-            list of size five which is every 5th element of the origina list."""
-            assert len(input_list) >= size
+    @staticmethod
+    def rescale_list(input_list, size):
+        """Given a list and a size, return a rescaled/samples list. For example,
+        if we want a list of size 5 and we have a list of size 25, return a new
+        list of size five which is every 5th element of the origina list."""
+        assert len(input_list) >= size
 
-            # Get the number to skip between iterations.
-            skip = len(input_list) // size
+        # Get the number to skip between iterations.
+        skip = len(input_list) // size
 
-            # Build our new output.
-            output = [input_list[i] for i in range(0, len(input_list), skip)]
+        # Build our new output.
+        output = [input_list[i] for i in range(0, len(input_list), skip)]
 
-            # Cut off the last one if needed.
-            return output[:size]
+        # Cut off the last one if needed.
+        return output[:size]
 
-        def print_class_from_prediction(self, predictions, nb_to_return=5):
-            """Given a prediction, print the top classes."""
-            # Get the prediction for each label.
-            label_predictions = {}
-            for i, label in enumerate(self.classes):
-                label_predictions[label] = predictions[i]
+    def print_class_from_prediction(self, predictions, nb_to_return=5):
+        """Given a prediction, print the top classes."""
+        # Get the prediction for each label.
+        label_predictions = {}
+        for i, label in enumerate(self.classes):
+            label_predictions[label] = predictions[i]
 
-            # Now sort them.
-            sorted_lps = sorted(
-                label_predictions.items(),
-                key=operator.itemgetter(1),
-                reverse=True
-            )
-            result = []
-            # And return the top N.
-            for i, class_prediction in enumerate(sorted_lps):
-                if i > nb_to_return - 1 or class_prediction[1] == 0.0:
-                    break
-                print("%s: %.2f" % (class_prediction[0], class_prediction[1]))
-                result.append("%s: %.2f" % (class_prediction[0], class_prediction[1]))
+        # Now sort them.
+        sorted_lps = sorted(
+            label_predictions.items(),
+            key=operator.itemgetter(1),
+            reverse=True
+        )
+        result = []
+        # And return the top N.
+        for i, class_prediction in enumerate(sorted_lps):
+            if i > nb_to_return - 1 or class_prediction[1] == 0.0:
+                break
+            print("%s: %.2f" % (class_prediction[0], class_prediction[1]))
+            result.append("%s: %.2f" % (class_prediction[0], class_prediction[1]))
 
-            return result
+        return result
