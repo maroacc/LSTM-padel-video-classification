@@ -196,7 +196,7 @@ class DataSet():
                 y.append(self.get_class_one_hot(sample[1]))
                 #print(np.array(X))
 
-            yield np.array(X), np.array(y)
+            return np.array(X), np.array(y)
 
     @threadsafe_generator
     def frame_generator_predict(self, batch_size, train_test, data_type):
