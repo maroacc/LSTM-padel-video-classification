@@ -146,7 +146,6 @@ class DataSet():
 
             X.append(sequence)
             y.append(self.get_class_one_hot(row[1]))
-            print('Hello')
             print(np.array(X).astype(np.int))
 
         return np.array(X).astype(np.int), np.array(y)
