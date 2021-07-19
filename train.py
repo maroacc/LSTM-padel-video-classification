@@ -59,6 +59,7 @@ def train(data_type, seq_length, model, saved_model=None,
 
     # Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
+    generator_predict = data.frame_generator_predict(1, 'train', data_type)
 
     # Fit!
     if load_to_memory:
@@ -91,6 +92,10 @@ def train(data_type, seq_length, model, saved_model=None,
         #     validation_steps= 40,
         #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
         # )
+
+        prediction = rm.model.predict(generator_predict)
+        print(prediction)
+
 
 
 def main():
