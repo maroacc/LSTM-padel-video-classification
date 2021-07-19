@@ -191,6 +191,7 @@ class DataSet():
                     # print(f'sample: {sample}')
                     # print(f'sequence: {sequence}')
                     if sequence is None:
+                        print("exiting while")
                         raise ValueError("Can't find sequence. Did you generate them?")
 
                 X.append(sequence)
