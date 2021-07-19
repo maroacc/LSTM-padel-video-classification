@@ -91,8 +91,8 @@ def train(data_type, seq_length, model, saved_model=None,
         #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
         # )
 
-        generator_predict = data.frame_generator_predict(1, 'train', data_type)
-        prediction = rm.model.predict(generator_predict)
+        generator_predict = data.frame_generator(1, 'train', data_type)
+        prediction = rm.model.predict_generator(generator_predict)
         print(prediction)
 
 
