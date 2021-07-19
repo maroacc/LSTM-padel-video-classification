@@ -165,9 +165,10 @@ class DataSet():
 
         while 1:
             X, y = [], []
-
+            print("Inside while")
             # Generate batch_size samples.
             for _ in range(batch_size):
+                print("Inside for")
                 # Reset to be safe.
                 sequence = None
 
@@ -213,9 +214,10 @@ class DataSet():
 
         while 1:
             X, y = [], []
-
+            print("Inside while")
             # Generate batch_size samples.
             for _ in range(batch_size):
+                print("Inside for")
                 # Reset to be safe.
                 sequence = None
 
@@ -240,7 +242,7 @@ class DataSet():
                     if sequence is None:
                         raise ValueError("Can't find sequence. Did you generate them?")
 
-                X.append(np.expand_dims(sequence, axis = 0))
+                X.append(sequence)
                 y.append(self.get_class_one_hot(sample[1]))
                 #print(np.array(X))
 
