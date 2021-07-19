@@ -214,7 +214,7 @@ class DataSet():
         print("Creating %s generator with %d samples." % (train_test, len(data)))
         i = 0
         while i < len(data):
-            i ++
+            i = i + 1
             X = []
             print("Inside while predicting")
             # Generate batch_size samples.
