@@ -92,7 +92,7 @@ def train(data_type, seq_length, model, saved_model=None,
         # )
 
         generator_predict = data.frame_generator(1, 'train', data_type)
-        print('creates generator')
+        print(f'generator_predict[0]': generator_predict[0])
         prediction = rm.model.predict_generator(generator_predict)
         print('predicts')
         print(prediction)
@@ -126,7 +126,7 @@ def main():
     saved_model = None  # None or weights file
     load_to_memory = False # pre-load the sequences into memory
     batch_size = 1
-    nb_epoch = 10
+    nb_epoch = 1
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
 
