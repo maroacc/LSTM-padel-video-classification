@@ -244,7 +244,7 @@ class DataSet():
                 y.append(self.get_class_one_hot(sample[1]))
                 #print(np.array(X))
 
-            yield np.array(X), np.array(y)
+            yield np.array(X)
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
