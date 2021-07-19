@@ -92,7 +92,7 @@ def train(data_type, seq_length, model, saved_model=None,
         # )
 
         generator_predict = data.frame_generator(1, 'train', data_type)
-        print(f'generator_predict[0]: {generator_predict[0]}')
+        print(f'generator_predict.next(): {generator_predict.next()}')
         prediction = rm.model.predict_generator(generator_predict)
         print('predicts')
         print(prediction)
