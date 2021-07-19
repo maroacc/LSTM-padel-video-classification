@@ -199,53 +199,53 @@ class DataSet():
 
             yield np.array(X), np.array(y)
 
-@threadsafe_generator
-def frame_generator_predict(self, batch_size, train_test, data_type):
-    """Return a generator that we can use to train on. There are
-    a couple different things we can return:
+    @threadsafe_generator
+    def frame_generator_predict(self, batch_size, train_test, data_type):
+        """Return a generator that we can use to train on. There are
+        a couple different things we can return:
 
-    data_type: 'features', 'images'
-    """
-    # Get the right dataset for the generator.
-    train, test = self.split_train_test()
-    data = train if train_test == 'train' else test
+        data_type: 'features', 'images'
+        """
+        # Get the right dataset for the generator.
+        train, test = self.split_train_test()
+        data = train if train_test == 'train' else test
 
-    print("Creating %s generator with %d samples." % (train_test, len(data)))
+        print("Creating %s generator with %d samples." % (train_test, len(data)))
 
-    while 1:
-        X, y = [], []
+        while 1:
+            X, y = [], []
 
-        # Generate batch_size samples.
-        for _ in range(batch_size):
-            # Reset to be safe.
-            sequence = None
+            # Generate batch_size samples.
+            for _ in range(batch_size):
+                # Reset to be safe.
+                sequence = None
 
-            # Get a random sample.
-            sample = random.choice(data)
+                # Get a random sample.
+                sample = random.choice(data)
 
-            # Check to see if we've already saved this sequence.
-            if data_type is "images":
-                # Get and resample frames.
-                frames = self.get_frames_for_sample(sample)
-                frames = self.rescale_list(frames, self.seq_length)
+                # Check to see if we've already saved this sequence.
+                if data_type is "images":
+                    # Get and resample frames.
+                    frames = self.get_frames_for_sample(sample)
+                    frames = self.rescale_list(frames, self.seq_length)
 
-                # Build the image sequence
-                sequence = self.build_image_sequence(frames)
-            else:
-                # Get the sequence from disk.
-                #print("Get the sequence from disk")
-                sequence = self.get_extracted_sequence(data_type, sample)
-                # print(f'data_type: {data_type}')
-                # print(f'sample: {sample}')
-                # print(f'sequence: {sequence}')
-                if sequence is None:
-                    raise ValueError("Can't find sequence. Did you generate them?")
+                    # Build the image sequence
+                    sequence = self.build_image_sequence(frames)
+                else:
+                    # Get the sequence from disk.
+                    #print("Get the sequence from disk")
+                    sequence = self.get_extracted_sequence(data_type, sample)
+                    # print(f'data_type: {data_type}')
+                    # print(f'sample: {sample}')
+                    # print(f'sequence: {sequence}')
+                    if sequence is None:
+                        raise ValueError("Can't find sequence. Did you generate them?")
 
-            X.append(np.expand_dims(sequence, axis = 0))
-            y.append(self.get_class_one_hot(sample[1]))
-            #print(np.array(X))
+                X.append(np.expand_dims(sequence, axis = 0))
+                y.append(self.get_class_one_hot(sample[1]))
+                #print(np.array(X))
 
-        yield np.array(X), np.array(y)
+            yield np.array(X), np.array(y)
 
         def build_image_sequence(self, frames):
             """Given a set of frames (filenames), build our sequence."""
