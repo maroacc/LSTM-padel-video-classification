@@ -213,11 +213,11 @@ class DataSet():
         print("Creating %s generator with %d samples." % (train_test, len(data)))
 
         while 1:
-            X, y = [], []
-            print("Inside while")
+            X = []
+            print("Inside while predicting")
             # Generate batch_size samples.
             for _ in range(batch_size):
-                print("Inside for")
+                print("Inside for predicting")
                 # Reset to be safe.
                 sequence = None
 
@@ -243,7 +243,7 @@ class DataSet():
                         raise ValueError("Can't find sequence. Did you generate them?")
 
                 X.append(sequence)
-                y.append(self.get_class_one_hot(sample[1]))
+                # y.append(self.get_class_one_hot(sample[1]))
                 #print(np.array(X))
 
             yield np.array(X)
