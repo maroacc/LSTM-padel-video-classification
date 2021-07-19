@@ -27,7 +27,7 @@ video_writer = cv2.VideoWriter("result.avi", fourcc, 15, (int(width), int(height
 data = DataSet(seq_length=seq_length, class_limit=class_limit, image_shape=(height, width, 3))
 
 # get the model.
-extract_model = Extractor(image_shape=(height, width, 3))
+extract_model = Extractor(image_shape=(int(height), int(width), 3))
 saved_LSTM_model = load_model(saved_model)
 
 frames = []

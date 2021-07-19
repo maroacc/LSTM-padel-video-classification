@@ -10,7 +10,7 @@ import sys
 import operator
 import threading
 from processor import process_image
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 
 class threadsafe_iterator:
     def __init__(self, iterator):
@@ -40,7 +40,7 @@ class DataSet():
         """
         self.seq_length = seq_length
         self.class_limit = class_limit
-        self.sequence_path = os.path.join('data', 'sequences')
+        self.sequence_path = os.path.join('/content/drive/MyDrive/cnn/data', 'sequences')
         self.max_frames = 300  # max number of frames a video can have for us to use it
 
         # Get the data.
@@ -57,7 +57,7 @@ class DataSet():
     @staticmethod
     def get_data():
         """Load our data from file."""
-        with open(os.path.join('data', 'data_file.csv'), 'r') as fin:
+        with open(os.path.join('/content/drive/MyDrive/cnn/data', 'data_file.csv'), 'r') as fin:
             reader = csv.reader(fin)
             data = list(reader)
 
@@ -138,6 +138,7 @@ class DataSet():
 
             else:
                 sequence = self.get_extracted_sequence(data_type, row)
+                print(f'sequence: {sequence}')
 
                 if sequence is None:
                     print("Can't find sequence. Did you generate them?")
@@ -145,8 +146,10 @@ class DataSet():
 
             X.append(sequence)
             y.append(self.get_class_one_hot(row[1]))
+            print('Hello')
+            print(np.array(X).astype(np.int))
 
-        return np.array(X), np.array(y)
+        return np.array(X).astype(np.int), np.array(y)
 
     @threadsafe_generator
     def frame_generator(self, batch_size, train_test, data_type):
@@ -182,15 +185,67 @@ class DataSet():
                     sequence = self.build_image_sequence(frames)
                 else:
                     # Get the sequence from disk.
+                    #print("Get the sequence from disk")
                     sequence = self.get_extracted_sequence(data_type, sample)
-
+                    # print(f'data_type: {data_type}')
+                    # print(f'sample: {sample}')
+                    # print(f'sequence: {sequence}')
                     if sequence is None:
                         raise ValueError("Can't find sequence. Did you generate them?")
 
                 X.append(sequence)
                 y.append(self.get_class_one_hot(sample[1]))
+                #print(np.array(X))
 
             yield np.array(X), np.array(y)
+
+@threadsafe_generator
+def frame_generator_predict(self, batch_size, train_test, data_type):
+    """Return a generator that we can use to train on. There are
+    a couple different things we can return:
+
+    data_type: 'features', 'images'
+    """
+    # Get the right dataset for the generator.
+    train, test = self.split_train_test()
+    data = train if train_test == 'train' else test
+
+    print("Creating %s generator with %d samples." % (train_test, len(data)))
+
+    while 1:
+        X, y = [], []
+
+        # Generate batch_size samples.
+        for _ in range(batch_size):
+            # Reset to be safe.
+            sequence = None
+
+            # Get a random sample.
+            sample = random.choice(data)
+
+            # Check to see if we've already saved this sequence.
+            if data_type is "images":
+                # Get and resample frames.
+                frames = self.get_frames_for_sample(sample)
+                frames = self.rescale_list(frames, self.seq_length)
+
+                # Build the image sequence
+                sequence = self.build_image_sequence(frames)
+            else:
+                # Get the sequence from disk.
+                #print("Get the sequence from disk")
+                sequence = self.get_extracted_sequence(data_type, sample)
+                # print(f'data_type: {data_type}')
+                # print(f'sample: {sample}')
+                # print(f'sequence: {sequence}')
+                if sequence is None:
+                    raise ValueError("Can't find sequence. Did you generate them?")
+
+            X.append(np.expand_dims(sequence, axis = 0))
+            y.append(self.get_class_one_hot(sample[1]))
+            #print(np.array(X))
+
+        yield np.array(X), np.array(y)
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
@@ -199,8 +254,10 @@ class DataSet():
     def get_extracted_sequence(self, data_type, sample):
         """Get the saved extracted features."""
         filename = sample[2]
+        #print(f'filename: {filename}')
         path = os.path.join(self.sequence_path, filename + '-' + str(self.seq_length) + \
             '-' + data_type + '.npy')
+        #print(f'path: {path}')
         if os.path.isfile(path):
             return np.load(path)
         else:
@@ -237,7 +294,7 @@ class DataSet():
     def get_frames_for_sample(sample):
         """Given a sample row from the data file, get all the corresponding frame
         filenames."""
-        path = os.path.join('data', sample[0], sample[1])
+        path = os.path.join('/content/drive/MyDrive/cnn/data', sample[0], sample[1])
         filename = sample[2]
         images = sorted(glob.glob(os.path.join(path, filename + '*jpg')))
         return images

@@ -14,20 +14,20 @@ def train(data_type, seq_length, model, saved_model=None,
           load_to_memory=False, batch_size=32, nb_epoch=100):
     # Helper: Save the model.
     checkpointer = ModelCheckpoint(
-        filepath=os.path.join('data', 'checkpoints', model + '-' + data_type + \
+        filepath=os.path.join('/content/drive/MyDrive/cnn/data', 'checkpoints', model + '-' + data_type + \
             '.{epoch:03d}-{val_loss:.3f}.hdf5'),
         verbose=1,
         save_best_only=True)
 
     # Helper: TensorBoard
-    tb = TensorBoard(log_dir=os.path.join('data', 'logs', model))
+    tb = TensorBoard(log_dir=os.path.join('/content/drive/MyDrive/cnn/data', 'logs', model))
 
     # Helper: Stop when we stop learning.
     early_stopper = EarlyStopping(patience=5)
 
     # Helper: Save results.
     timestamp = time.time()
-    csv_logger = CSVLogger(os.path.join('data', 'logs', model + '-' + 'training-' + \
+    csv_logger = CSVLogger(os.path.join('/content/drive/MyDrive/cnn/data', 'logs', model + '-' + 'training-' + \
         str(timestamp) + '.log'))
 
     # Get the data and process it.
@@ -54,6 +54,7 @@ def train(data_type, seq_length, model, saved_model=None,
     else:
         # Get generators.
         generator = data.frame_generator(batch_size, 'train', data_type)
+        #print(*generator, sep='\n') # * will unpack the generator
         val_generator = data.frame_generator(batch_size, 'test', data_type)
 
     # Get the model.
@@ -73,14 +74,24 @@ def train(data_type, seq_length, model, saved_model=None,
     else:
         # Use fit generator.
         rm.model.fit_generator(
-            generator=generator,
-            steps_per_epoch=steps_per_epoch,
-            epochs=nb_epoch,
-            verbose=1,
-            callbacks=[tb, early_stopper, csv_logger, checkpointer],
-            validation_data=val_generator,
-            validation_steps=40,
-            workers=4)
+           generator=generator,
+           steps_per_epoch=steps_per_epoch,
+           epochs=nb_epoch,
+           verbose=1,
+           callbacks=[tb, early_stopper, csv_logger, checkpointer],
+           validation_data=val_generator,
+           validation_steps=40),
+           workers=4)
+
+        #     history = rm.model.fit(
+        #     generator,
+        #     epochs=nb_epoch,
+        #     steps_per_epoch = steps_per_epoch,
+        #     validation_data=val_generator,
+        #     validation_steps= 40,
+        #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
+        # )
+
 
 def main():
     """These are the main training settings. Set each before running
@@ -96,11 +107,11 @@ def main():
         print ("Example: python train.py 75 2 720 1280")
         exit (1)
 
-    sequences_dir = os.path.join('data', 'sequences')
+    sequences_dir = os.path.join('/content/drive/MyDrive/cnn/data', 'sequences')
     if not os.path.exists(sequences_dir):
         os.mkdir(sequences_dir)
 
-    checkpoints_dir = os.path.join('data', 'checkpoints')
+    checkpoints_dir = os.path.join('/content/drive/MyDrive/cnn/data', 'checkpoints')
     if not os.path.exists(checkpoints_dir):
         os.mkdir(checkpoints_dir)
 
@@ -108,8 +119,8 @@ def main():
     model = 'lstm'
     saved_model = None  # None or weights file
     load_to_memory = False # pre-load the sequences into memory
-    batch_size = 32
-    nb_epoch = 1000
+    batch_size = 1
+    nb_epoch = 10
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
 

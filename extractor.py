@@ -46,4 +46,3 @@ class Extractor():
             features = features[0]
 
         return features
-
