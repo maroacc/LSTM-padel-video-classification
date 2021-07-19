@@ -212,8 +212,9 @@ class DataSet():
         data = train if train_test == 'train' else test
 
         print("Creating %s generator with %d samples." % (train_test, len(data)))
-
-        while 1:
+        i = 0
+        while i < len(data):
+            i ++
             X = []
             print("Inside while predicting")
             # Generate batch_size samples.
