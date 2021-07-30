@@ -24,7 +24,7 @@ def main():
         image_width = int(sys.argv[6])
     else:
         print ("Usage: python predict.py sequence_length class_limit saved_model_name video_directory")
-        # TODO: example dir ?
+        # TODO: how do you specify the dir ?
         print ("Example: python predict.py 75 2 lstm-features.095-0.090.hdf5 /example_dir 720 1280")
         exit (1)
 
