@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 from data import DataSet
 from extractor import Extractor
+from extract_features import extract_features
 from keras.models import load_model
 
 
