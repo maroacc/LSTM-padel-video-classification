@@ -15,7 +15,7 @@ from data import DataSet
 from extractor import Extractor
 from tqdm import tqdm
 
-def extract_features(seq_length=40, class_limit=2, image_shape=(299, 299, 3)):
+def extract_features(seq_length=40, class_limit=2, image_shape=(299, 299, 3), predict = false):
     # Get the dataset.
     data = DataSet(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape)
 
@@ -26,9 +26,14 @@ def extract_features(seq_length=40, class_limit=2, image_shape=(299, 299, 3)):
     pbar = tqdm(total=len(data.data))
     for video in data.data:
 
-        # Get the path to the sequence for this video.
-        path = os.path.join('/content/drive/MyDrive/cnn/data', 'sequences', video[2] + '-' + str(seq_length) + \
-            '-features')  # numpy will auto-append .npy
+        if predict:
+            # Get the path to the sequence for this video.
+            path = os.path.join('/content/drive/MyDrive/cnn/predict/data', 'sequences', video[2] + '-' + str(seq_length) + \
+                '-features')  # numpy will auto-append .npy
+        else:
+            # Get the path to the sequence for this video.
+            path = os.path.join('/content/drive/MyDrive/cnn/data', 'sequences', video[2] + '-' + str(seq_length) + \
+                                '-features')  # numpy will auto-append .npy
 
         # Check if we already have it.
         if os.path.isfile(path + '.npy'):
