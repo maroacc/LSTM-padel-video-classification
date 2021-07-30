@@ -62,43 +62,16 @@ def predict(data_type, seq_length, model, saved_model=None,
 
     #Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
-    # # Fit!
-    # if load_to_memory:
-    #     # Use standard fit.
-    #     rm.model.fit(
-    #         X,
-    #         y,
-    #         batch_size=batch_size,
-    #         validation_data=(X_test, y_test),
-    #         verbose=1,
-    #         callbacks=[tb, early_stopper, csv_logger, checkpointer],
-    #         epochs=nb_epoch)
-    # else:
-    #     # Use fit generator.
-    #     rm.model.fit_generator(
-    #        generator=generator,
-    #        steps_per_epoch=steps_per_epoch,
-    #        epochs=nb_epoch,
-    #        verbose=1,
-    #        callbacks=[tb, early_stopper, csv_logger, checkpointer],
-    #        validation_data=val_generator,
-    #        validation_steps=40,
-    #        workers=4)
 
-        #     history = rm.model.fit(
-        #     generator,
-        #     epochs=nb_epoch,
-        #     steps_per_epoch = steps_per_epoch,
-        #     validation_data=val_generator,
-        #     validation_steps= 40,
-        #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
-        # )
+    generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
+    prediction_train = rm.model.predict_generator(generator_predict_train)
+    print('Predictions:')
+    print(prediction_train)
 
-    generator_predict = data.frame_generator_predict(1, 'train', data_type)
-    print(f'generator_predict.next(): {generator_predict}')
-    prediction = rm.model.predict_generator(generator_predict)
-    print('predicts')
-    print(prediction)
+    generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
+    prediction_test = rm.model.predict_generator(generator_predict_train)
+    print('Predictions:')
+    print(prediction_test)
 
 
 def main():
