@@ -15,7 +15,7 @@ from data import DataSet
 from extractor import Extractor
 from tqdm import tqdm
 
-def extract_features(seq_length=40, class_limit=2, image_shape=(299, 299, 3), predict = false):
+def extract_features(seq_length=40, class_limit=2, image_shape=(299, 299, 3), predict = False):
     # Get the dataset.
     data = DataSet(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape)
 
