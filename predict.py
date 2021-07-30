@@ -59,30 +59,30 @@ def predict(data_type, seq_length, model, saved_model=None,
         #print(*generator, sep='\n') # * will unpack the generator
         val_generator = data.frame_generator(batch_size, 'test', data_type)
 
-    # Get the model.
+    #Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
-    # Fit!
-    if load_to_memory:
-        # Use standard fit.
-        rm.model.fit(
-            X,
-            y,
-            batch_size=batch_size,
-            validation_data=(X_test, y_test),
-            verbose=1,
-            callbacks=[tb, early_stopper, csv_logger, checkpointer],
-            epochs=nb_epoch)
-    else:
-        # Use fit generator.
-        rm.model.fit_generator(
-           generator=generator,
-           steps_per_epoch=steps_per_epoch,
-           epochs=nb_epoch,
-           verbose=1,
-           callbacks=[tb, early_stopper, csv_logger, checkpointer],
-           validation_data=val_generator,
-           validation_steps=40,
-           workers=4)
+    # # Fit!
+    # if load_to_memory:
+    #     # Use standard fit.
+    #     rm.model.fit(
+    #         X,
+    #         y,
+    #         batch_size=batch_size,
+    #         validation_data=(X_test, y_test),
+    #         verbose=1,
+    #         callbacks=[tb, early_stopper, csv_logger, checkpointer],
+    #         epochs=nb_epoch)
+    # else:
+    #     # Use fit generator.
+    #     rm.model.fit_generator(
+    #        generator=generator,
+    #        steps_per_epoch=steps_per_epoch,
+    #        epochs=nb_epoch,
+    #        verbose=1,
+    #        callbacks=[tb, early_stopper, csv_logger, checkpointer],
+    #        validation_data=val_generator,
+    #        validation_steps=40,
+    #        workers=4)
 
         #     history = rm.model.fit(
         #     generator,
@@ -93,11 +93,11 @@ def predict(data_type, seq_length, model, saved_model=None,
         #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
         # )
 
-        generator_predict = data.frame_generator_predict(1, 'train', data_type)
-        print(f'generator_predict.next(): {generator_predict}')
-        prediction = rm.model.predict_generator(generator_predict)
-        print('predicts')
-        print(prediction)
+    generator_predict = data.frame_generator_predict(1, 'train', data_type)
+    print(f'generator_predict.next(): {generator_predict}')
+    prediction = rm.model.predict_generator(generator_predict)
+    print('predicts')
+    print(prediction)
 
 
 def main():
@@ -127,7 +127,7 @@ def main():
 
     # model can be only 'lstm'
     model = 'lstm'
-    saved_model = None  # None or weights file
+    saved_model = '/content/drive/MyDrive/cnn/model.h5'  # None or weights file
     load_to_memory = False # pre-load the sequences into memory
     batch_size = 1
     nb_epoch = 1

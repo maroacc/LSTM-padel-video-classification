@@ -41,14 +41,13 @@ class ResearchModels():
             print("Loading LSTM model.")
             self.input_shape = (seq_length, features_length)
             self.model = self.lstm()
+            # Now compile the network.
+            optimizer = Adam(lr=1e-5, decay=1e-6)
+            self.model.compile(loss='categorical_crossentropy', optimizer=optimizer,
+                               metrics=metrics)
         else:
             print("Unknown network.")
             sys.exit()
-
-        # Now compile the network.
-        optimizer = Adam(lr=1e-5, decay=1e-6)
-        self.model.compile(loss='categorical_crossentropy', optimizer=optimizer,
-                           metrics=metrics)
 
         print(self.model.summary())
 

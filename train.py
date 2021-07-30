@@ -90,7 +90,7 @@ def train(data_type, seq_length, model, saved_model=None,
         #     validation_steps= 40,
         #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
         # )
-        rm.model.save('path_to_my_model.h5')
+        rm.model.save('/content/drive/MyDrive/cnn/model.h5')
         # generator_predict = data.frame_generator_predict(1, 'train', data_type)
         # print(f'generator_predict.next(): {generator_predict}')
         # prediction = rm.model.predict_generator(generator_predict)
