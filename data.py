@@ -327,6 +327,8 @@ class DataSet():
         """Given a prediction, print the top classes."""
         # Get the prediction for each label.
         label_predictions = {}
+        print("self.classes")
+        print(enumerate(self.classes))
         for i, label in enumerate(self.classes):
             label_predictions[label] = predictions[i]
 
