@@ -272,7 +272,7 @@ class DataSet():
                 print(f'shape: {self.get_class_one_hot(sample[1]).shape}')
 
                 y.append(np.where(self.get_class_one_hot(sample[1]) == 1))
-        return np.array(y)
+        return np.squeeze(np.array(y))
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
