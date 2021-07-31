@@ -86,8 +86,8 @@ def predict(data_type, seq_length, model, saved_model=None,
     # Display and save results
     #results.print(accuracy, confusion_matrix)
 
-    if save:
-        results.save(confusion_matrix, classification, predictions)
+    # if save:
+    #     results.save(confusion_matrix, classification, predictions)
 
     # generator_predict_test = data.frame_generator_predict(1, 'test', data_type)
     # prediction_test = rm.model.predict_generator(generator_predict_test)
