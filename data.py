@@ -245,10 +245,10 @@ class DataSet():
                         raise ValueError("Can't find sequence. Did you generate them?")
 
                 X.append(sequence)
-                # y.append(self.get_class_one_hot(sample[1]))
+                y.append(self.get_class_one_hot(sample[1]))
                 #print(np.array(X))
 
-            yield np.array(X)
+            yield np.array(X), np.array(y)
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""

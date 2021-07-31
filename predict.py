@@ -66,10 +66,12 @@ def predict(data_type, seq_length, model, saved_model=None,
     #Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
 
-    generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
+    generator_predict_train, y = data.frame_generator_predict(1, 'train', data_type)
     prediction_train = rm.model.predict_generator(generator_predict_train)
     print('Predictions:')
     print(prediction_train)
+    print('y')
+    print(y)
     #TODO: predicted labels
 
     # Format results and compute classification statistics
@@ -79,6 +81,14 @@ def predict(data_type, seq_length, model, saved_model=None,
     print('Predicted labels:')
     print(predicted_labels)
     results = Results(class_indices, dataset_name=dataset_name)
+
+    #accuracy, confusion_matrix, classification = results.compute(test_generator.filenames, test_generator.classes,
+                                                                 predicted_labels)
+    # Display and save results
+    #results.print(accuracy, confusion_matrix)
+
+    if save:
+        results.save(confusion_matrix, classification, predictions)
 
     # generator_predict_test = data.frame_generator_predict(1, 'test', data_type)
     # prediction_test = rm.model.predict_generator(generator_predict_test)
