@@ -72,9 +72,9 @@ def predict(data_type, seq_length, model, saved_model=None,
     # print(next(generator_predict_train))
     prediction_train = rm.model.predict_generator(generator_predict_train)
     print('Predictions:')
-    print(prediction_train)
+    print(prediction_train.shape)
     print('y')
-    print(y)
+    print(y.shape)
     #TODO: predicted labels
 
     # Format results and compute classification statistics
