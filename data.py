@@ -216,10 +216,8 @@ class DataSet():
         while i < len(data):
             i = i + 1
             X, y = [], []
-            print("Inside while predicting")
             # Generate batch_size samples.
             for _ in range(batch_size):
-                print("Inside for predicting")
                 # Reset to be safe.
                 sequence = None
 
@@ -272,27 +270,8 @@ class DataSet():
                 # Get a random sample.
                 sample = data[i-1]
 
-                # Check to see if we've already saved this sequence.
-                if data_type is "images":
-                    # Get and resample frames.
-                    frames = self.get_frames_for_sample(sample)
-                    frames = self.rescale_list(frames, self.seq_length)
-
-                    # Build the image sequence
-                    sequence = self.build_image_sequence(frames)
-                else:
-                    # Get the sequence from disk.
-                    #print("Get the sequence from disk")
-                    sequence = self.get_extracted_sequence(data_type, sample)
-                    # print(f'data_type: {data_type}')
-                    # print(f'sample: {sample}')
-                    # print(f'sequence: {sequence}')
-                    if sequence is None:
-                        raise ValueError("Can't find sequence. Did you generate them?")
-
-                X.append(sequence)
                 y.append(self.get_class_one_hot(sample[1]))
-        return np.array(X), np.array(y)
+        return np.array(y)
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
