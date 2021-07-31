@@ -68,7 +68,7 @@ def predict(data_type, seq_length, model, saved_model=None,
 
     generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
     print('generator_predict_train:')
-    print(generator_predict_train)
+    print(next(generator_predict_train))
     prediction_train = rm.model.predict_generator(generator_predict_train)
     print('Predictions:')
     print(prediction_train)
