@@ -75,6 +75,9 @@ def predict(data_type, seq_length, model, saved_model=None,
     # Format results and compute classification statistics
     dataset_name = 'THETIS'
     class_indices = {"backhand": 0, "forehand": 1}
+    predicted_labels = np.argmax(prediction_train, axis=1).ravel().tolist()
+    print('Predicted labels:')
+    print(predicted_labels)
     results = Results(class_indices, dataset_name=dataset_name)
 
     # generator_predict_test = data.frame_generator_predict(1, 'test', data_type)
