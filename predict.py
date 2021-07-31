@@ -66,7 +66,7 @@ def predict(data_type, seq_length, model, saved_model=None,
     #Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
 
-    generator_predict_train, y = data.frame_generator_predict(1, 'train', data_type)
+    generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
     prediction_train = rm.model.predict_generator(generator_predict_train)
     print('Predictions:')
     print(prediction_train)
