@@ -11,6 +11,8 @@ from extractor import Extractor
 from extract_features import extract_features
 from keras.models import load_model
 from models import ResearchModels
+from results import Results
+
 
 def predict(data_type, seq_length, model, saved_model=None,
           class_limit=None, image_shape=None,
