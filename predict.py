@@ -82,8 +82,7 @@ def predict(data_type, seq_length, model, saved_model=None,
     print(predicted_labels)
     results = Results(class_indices, dataset_name=dataset_name)
 
-    #accuracy, confusion_matrix, classification = results.compute(test_generator.filenames, test_generator.classes,
-                                                                 predicted_labels)
+    #accuracy, confusion_matrix, classification = results.compute(test_generator.filenames, test_generator.classes,predicted_labels)
     # Display and save results
     #results.print(accuracy, confusion_matrix)
 
