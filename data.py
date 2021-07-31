@@ -269,8 +269,9 @@ class DataSet():
 
                 # Get a random sample.
                 sample = data[i-1]
+                print(f'shape: {self.get_class_one_hot(sample[1]).shape}')
 
-                y.append(self.get_class_one_hot(sample[1]).index(1))
+                y.append(np.where(self.get_class_one_hot(sample[1]) == 1))
         return np.array(y)
 
     def build_image_sequence(self, frames):
