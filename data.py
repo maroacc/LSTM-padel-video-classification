@@ -215,7 +215,7 @@ class DataSet():
         i = 0
         while i < len(data):
             i = i + 1
-            X = []
+            X, y = [], []
             print("Inside while predicting")
             # Generate batch_size samples.
             for _ in range(batch_size):
