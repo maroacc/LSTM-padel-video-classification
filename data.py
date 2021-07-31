@@ -257,7 +257,7 @@ class DataSet():
 
         print("Returning array with all the classes")
         i = 0
-        X, y = [], []
+        classes, filenames = [], []
         while i < len(data):
             i = i + 1
             print("Inside while predicting")
@@ -271,8 +271,9 @@ class DataSet():
                 sample = data[i-1]
                 print(f'sample: {sample}')
 
-                y.append(np.where(self.get_class_one_hot(sample[1]) == 1))
-        return np.squeeze(np.array(y))
+                classes.append(np.where(self.get_class_one_hot(sample[1]) == 1))
+                filenames.append(sample[2])
+        return np.squeeze(np.array(classes)), np.array(classes)
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
