@@ -67,11 +67,18 @@ def predict(data_type, seq_length, model, saved_model=None,
     prediction_train = rm.model.predict_generator(generator_predict_train)
     print('Predictions:')
     print(prediction_train)
+    #TODO: predicted labels
 
-    generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
-    prediction_test = rm.model.predict_generator(generator_predict_train)
-    print('Predictions:')
-    print(prediction_test)
+    # Format results and compute classification statistics
+    dataset_name = 'THETIS'
+    print(f"generator_predict_train.class_indices: {generator_predict_train.class_indices}")
+    #generator_predict_train.class_indices
+    #results = Results(test_generator.class_indices, dataset_name=dataset_name)
+
+    # generator_predict_test = data.frame_generator_predict(1, 'test', data_type)
+    # prediction_test = rm.model.predict_generator(generator_predict_test)
+    # print('Predictions:')
+    # print(prediction_test)
 
 
 def main():
