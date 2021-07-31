@@ -273,7 +273,7 @@ class DataSet():
 
                 classes.append(np.where(self.get_class_one_hot(sample[1]) == 1))
                 filenames.append(sample[2])
-        return np.squeeze(np.array(classes)), np.array(classes)
+        return np.squeeze(np.array(classes)), filenames
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
