@@ -224,7 +224,7 @@ class DataSet():
                 sequence = None
 
                 # Get a random sample.
-                sample = random.choice(data)
+                sample = data[i]
 
                 # Check to see if we've already saved this sequence.
                 if data_type is "images":
