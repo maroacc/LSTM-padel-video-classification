@@ -269,7 +269,7 @@ class DataSet():
 
                 # Get a random sample.
                 sample = data[i-1]
-                print(f'shape: {self.get_class_one_hot(sample[1]).shape}')
+                print(f'sample: {sample}')
 
                 y.append(np.where(self.get_class_one_hot(sample[1]) == 1))
         return np.squeeze(np.array(y))

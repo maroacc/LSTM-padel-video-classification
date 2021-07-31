@@ -75,7 +75,7 @@ def predict(data_type, seq_length, model, saved_model=None,
     print(prediction_train.shape)
     print('y')
     print(y.shape)
-    #TODO: predicted labels
+    #TODO: check that they are in the same order (although they should be)
 
     # Format results and compute classification statistics
     dataset_name = 'THETIS'
