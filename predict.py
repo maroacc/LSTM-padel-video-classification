@@ -34,6 +34,7 @@ def predict(data_type, seq_length, model, saved_model=None,
     #     str(timestamp) + '.log'))
 
     # Get the data and process it.
+    global class_indices, class_indices
     if image_shape is None:
         data = DataSet(
             seq_length=seq_length,
@@ -71,9 +72,8 @@ def predict(data_type, seq_length, model, saved_model=None,
 
     # Format results and compute classification statistics
     dataset_name = 'THETIS'
-    print(f"generator_predict_train.class_indices: {generator_predict_train.class_indices}")
-    #generator_predict_train.class_indices
-    #results = Results(test_generator.class_indices, dataset_name=dataset_name)
+    class_indices = {"backhand": 0, "forehand": 1}
+    results = Results(class_indices, dataset_name=dataset_name)
 
     # generator_predict_test = data.frame_generator_predict(1, 'test', data_type)
     # prediction_test = rm.model.predict_generator(generator_predict_test)
