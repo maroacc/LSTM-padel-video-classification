@@ -246,7 +246,10 @@ class DataSet():
 
                 X.append(sequence)
                 y.append(self.get_class_one_hot(sample[1]))
-                #print(np.array(X))
+                print("X")
+                print(np.array(X))
+                print("y")
+                print(np.array(y))
 
             yield np.array(X), np.array(y)
 
