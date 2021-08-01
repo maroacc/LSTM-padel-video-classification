@@ -72,7 +72,7 @@ def predict(data_type, seq_length, model, saved_model=None,
     print(next(generator_predict_train))
     prediction_train = rm.model.predict_generator(generator_predict_train)
     print('Predictions:')
-    print(prediction_train.shape)
+    print(prediction_train)
     print('classes')
     print(classes)
     print('filenames')
