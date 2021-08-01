@@ -165,10 +165,10 @@ class DataSet():
 
         while 1:
             X, y = [], []
-            print("Inside while")
+            # print("Inside while")
             # Generate batch_size samples.
             for _ in range(batch_size):
-                print("Inside for")
+                # print("Inside for")
                 # Reset to be safe.
                 sequence = None
 
@@ -234,11 +234,11 @@ class DataSet():
                     sequence = self.build_image_sequence(frames)
                 else:
                     # Get the sequence from disk.
-                    #print("Get the sequence from disk")
+                    print("Get the sequence from disk")
                     sequence = self.get_extracted_sequence(data_type, sample)
                     # print(f'data_type: {data_type}')
-                    # print(f'sample: {sample}')
-                    # print(f'sequence: {sequence}')
+                    print(f'sample: {sample}')
+                    print(f'sequence: {sequence}')
                     if sequence is None:
                         raise ValueError("Can't find sequence. Did you generate them?")
 
@@ -260,16 +260,16 @@ class DataSet():
         classes, filenames = [], []
         while i < len(data):
             i = i + 1
-            print("Inside while predicting")
+            # print("Inside while predicting")
             # Generate batch_size samples.
             for _ in range(batch_size):
-                print("Inside for predicting")
+                # print("Inside for predicting")
                 # Reset to be safe.
                 sequence = None
 
                 # Get a random sample.
                 sample = data[i-1]
-                print(f'sample: {sample}')
+                # print(f'sample: {sample}')
 
                 classes.append(np.where(self.get_class_one_hot(sample[1]) == 1))
                 filenames.append(sample[2])
