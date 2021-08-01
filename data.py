@@ -282,10 +282,10 @@ class DataSet():
     def get_extracted_sequence(self, data_type, sample):
         """Get the saved extracted features."""
         filename = sample[2]
-        #print(f'filename: {filename}')
+        print(f'filename: {filename}')
         path = os.path.join(self.sequence_path, filename + '-' + str(self.seq_length) + \
             '-' + data_type + '.npy')
-        #print(f'path: {path}')
+        print(f'path: {path}')
         if os.path.isfile(path):
             print("is file")
             return np.load(path)
