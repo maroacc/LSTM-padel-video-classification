@@ -287,8 +287,10 @@ class DataSet():
             '-' + data_type + '.npy')
         #print(f'path: {path}')
         if os.path.isfile(path):
+            print("is file")
             return np.load(path)
         else:
+            print("is not file")
             return None
 
     def get_frames_by_filename(self, filename, data_type):
