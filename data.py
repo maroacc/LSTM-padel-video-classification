@@ -161,7 +161,7 @@ class DataSet():
         data_type: 'features', 'images'
         """
         # Get the right dataset for the generator.
-        train, test = self.split_train_test()
+        train, test, val = self.split_train_test()
         data = train if train_test == 'train' else test
 
         print("Creating %s generator with %d samples." % (train_test, len(data)))
