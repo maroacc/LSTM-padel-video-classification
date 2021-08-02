@@ -217,7 +217,7 @@ class DataSet():
         elif train_test == 'test':
             data = test
         else:
-            data = 'val'
+            data = val
 
         print("Creating %s generator with %d samples." % (train_test, len(data)))
         i = 0
