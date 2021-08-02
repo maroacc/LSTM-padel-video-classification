@@ -282,7 +282,7 @@ class DataSet():
 
                 # Get a random sample.
                 sample = data[i-1]
-                # print(f'sample: {sample}')
+                print(f'sample: {sample}')
 
                 classes.append(np.where(self.get_class_one_hot(sample[1]) == 1))
                 filenames.append(sample[2])
