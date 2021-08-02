@@ -125,8 +125,8 @@ def main():
     model = 'lstm'
     saved_model = None  # None or weights file
     load_to_memory = False # pre-load the sequences into memory
-    batch_size = 1
-    nb_epoch = 1
+    batch_size = 32
+    nb_epoch = 5
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
 
