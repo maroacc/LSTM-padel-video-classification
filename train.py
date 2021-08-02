@@ -54,7 +54,6 @@ def train(data_type, seq_length, model, saved_model=None,
     else:
         # Get generators.
         generator = data.frame_generator(batch_size, 'train', data_type)
-        #print(*generator, sep='\n') # * will unpack the generator
         val_generator = data.frame_generator(batch_size, 'test', data_type)
 
     # Get the model.
@@ -82,23 +81,6 @@ def train(data_type, seq_length, model, saved_model=None,
            validation_steps=40,
            workers=4)
 
-        #     history = rm.model.fit(
-        #     generator,
-        #     epochs=nb_epoch,
-        #     steps_per_epoch = steps_per_epoch,
-        #     validation_data=val_generator,
-        #     validation_steps= 40,
-        #     callbacks=[tb, early_stopper, csv_logger, checkpointer]
-        # )
-        rm.model.save('/content/drive/MyDrive/cnn/model.h5')
-        # generator_predict = data.frame_generator_predict(1, 'train', data_type)
-        # print(f'generator_predict.next(): {generator_predict}')
-        # prediction = rm.model.predict_generator(generator_predict)
-        # print('predicts')
-        # print(prediction)
-
-
-
 def main():
     """These are the main training settings. Set each before running
     this file."""
@@ -125,7 +107,7 @@ def main():
     model = 'lstm'
     saved_model = None  # None or weights file
     load_to_memory = False # pre-load the sequences into memory
-    batch_size = 32
+    batch_size = 16
     nb_epoch = 50
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
