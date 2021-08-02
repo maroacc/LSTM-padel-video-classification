@@ -14,20 +14,20 @@ def train(data_type, seq_length, model, saved_model=None,
           load_to_memory=False, batch_size=32, nb_epoch=100):
     # Helper: Save the model.
     checkpointer = ModelCheckpoint(
-        filepath=os.path.join('/content/drive/MyDrive/cnn/data', 'checkpoints', model + '-' + data_type + \
+        filepath=os.path.join('/content/data', 'checkpoints', model + '-' + data_type + \
             '.{epoch:03d}-{val_loss:.3f}.hdf5'),
         verbose=1,
         save_best_only=True)
 
     # Helper: TensorBoard
-    tb = TensorBoard(log_dir=os.path.join('/content/drive/MyDrive/cnn/data', 'logs', model))
+    tb = TensorBoard(log_dir=os.path.join('/content/data', 'logs', model))
 
     # Helper: Stop when we stop learning.
     early_stopper = EarlyStopping(patience=5)
 
     # Helper: Save results.
     timestamp = time.time()
-    csv_logger = CSVLogger(os.path.join('/content/drive/MyDrive/cnn/data', 'logs', model + '-' + 'training-' + \
+    csv_logger = CSVLogger(os.path.join('/content/data', 'logs', model + '-' + 'training-' + \
         str(timestamp) + '.log'))
 
     # Get the data and process it.
@@ -113,11 +113,11 @@ def main():
         print ("Example: python train.py 75 2 720 1280")
         exit (1)
 
-    sequences_dir = os.path.join('/content/drive/MyDrive/cnn/data', 'sequences')
+    sequences_dir = os.path.join('/content/data', 'sequences')
     if not os.path.exists(sequences_dir):
         os.mkdir(sequences_dir)
 
-    checkpoints_dir = os.path.join('/content/drive/MyDrive/cnn/data', 'checkpoints')
+    checkpoints_dir = os.path.join('/content/data', 'checkpoints')
     if not os.path.exists(checkpoints_dir):
         os.mkdir(checkpoints_dir)
 

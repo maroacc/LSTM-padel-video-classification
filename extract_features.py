@@ -32,7 +32,7 @@ def extract_features(seq_length=40, class_limit=2, image_shape=(299, 299, 3), pr
                 '-features')  # numpy will auto-append .npy
         else:
             # Get the path to the sequence for this video.
-            path = os.path.join('/content/drive/MyDrive/cnn/data', 'sequences', video[2] + '-' + str(seq_length) + \
+            path = os.path.join('/content/data', 'sequences', video[2] + '-' + str(seq_length) + \
                                 '-features')  # numpy will auto-append .npy
 
         # Check if we already have it.
