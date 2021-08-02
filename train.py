@@ -126,7 +126,7 @@ def main():
     saved_model = None  # None or weights file
     load_to_memory = False # pre-load the sequences into memory
     batch_size = 32
-    nb_epoch = 10
+    nb_epoch = 30
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
 
