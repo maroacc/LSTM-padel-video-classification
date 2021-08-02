@@ -108,12 +108,15 @@ class DataSet():
         """Split the data into train and test groups."""
         train = []
         test = []
+        val = []
         for item in self.data:
             if item[0] == 'train':
                 train.append(item)
-            else:
+            elif item[0] == 'test':
                 test.append(item)
-        return train, test
+            else:
+                val.append(item)
+        return train, test, val
 
     def get_all_sequences_in_memory(self, train_test, data_type):
         """
@@ -208,8 +211,13 @@ class DataSet():
         data_type: 'features', 'images'
         """
         # Get the right dataset for the generator.
-        train, test = self.split_train_test()
-        data = train if train_test == 'train' else test
+        train, test, val = self.split_train_test()
+        if train_test == 'train':
+            data = train
+        elif train_test == 'test':
+            data = test
+        else:
+            data = 'val'
 
         print("Creating %s generator with %d samples." % (train_test, len(data)))
         i = 0
@@ -252,8 +260,13 @@ class DataSet():
         data_type: 'features', 'images'
         """
         # Get the right dataset for the generator.
-        train, test = self.split_train_test()
-        data = train if train_test == 'train' else test
+        train, test, val = self.split_train_test()
+        if train_test == 'train':
+            data = train
+        elif train_test == 'test':
+            data = test
+        else:
+            data = 'val'
 
         print("Returning array with all the classes")
         i = 0

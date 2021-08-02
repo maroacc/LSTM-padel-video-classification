@@ -36,21 +36,21 @@ def predict(data_type, seq_length, model, video_path, saved_model=None,
     # Multiply by 0.7 to attempt to guess how much of data.data is the train set.
     steps_per_epoch = (len(data.data) * 0.7) // batch_size
 
-    if load_to_memory:
-        # Get data.
-        X, classes = data.get_all_sequences_in_memory('train', data_type)
-        X_test, y_test = data.get_all_sequences_in_memory('test', data_type)
-    else:
-        # Get generators.
-        generator = data.frame_generator(batch_size, 'train', data_type)
-        #print(*generator, sep='\n') # * will unpack the generator
-        val_generator = data.frame_generator(batch_size, 'test', data_type)
+    # if load_to_memory:
+    #     # Get data.
+    #     X, classes = data.get_all_sequences_in_memory('train', data_type)
+    #     X_test, y_test = data.get_all_sequences_in_memory('test', data_type)
+    # else:
+    #     # Get generators.
+    #     generator = data.frame_generator(batch_size, 'train', data_type)
+    #     #print(*generator, sep='\n') # * will unpack the generator
+    #     val_generator = data.frame_generator(batch_size, 'test', data_type)
 
     #Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
 
-    generator_predict_train = data.frame_generator_predict(1, 'test', data_type)
-    classes, filenames = data.get_classes_predict(1, 'test', data_type)
+    generator_predict_train = data.frame_generator_predict(1, 'val', data_type)
+    classes, filenames = data.get_classes_predict(1, 'val', data_type)
     # print('generator_predict_train:')
     # print(next(generator_predict_train))
     prediction_train = rm.model.predict_generator(generator_predict_train)
