@@ -188,8 +188,8 @@ class DataSet():
                     #print("Get the sequence from disk")
                     sequence = self.get_extracted_sequence(data_type, sample)
                     # print(f'data_type: {data_type}')
-                    # print(f'sample: {sample}')
-                    # print(f'sequence: {sequence}')
+                    print(f'sample: {sample}')
+                    print(f'sequence: {sequence}')
                     if sequence is None:
                         print("exiting while")
                         raise ValueError("Can't find sequence. Did you generate them?")
