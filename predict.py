@@ -115,7 +115,7 @@ def main():
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
 
-    #extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
+    extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
     predict(data_type, seq_length, model,  video_path, saved_model=saved_model,
           class_limit=class_limit, image_shape=image_shape,
           load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
