@@ -14,7 +14,7 @@ from models import ResearchModels
 from results import Results
 
 
-def predict(data_type, seq_length, model, saved_model=None,
+def predict(data_type, seq_length, model, video_path, saved_model=None,
           class_limit=None, image_shape=None,
           load_to_memory=False, batch_size=32, nb_epoch=100):
 
@@ -89,7 +89,6 @@ def main():
     if (len(sys.argv) == 7):
         seq_length = int(sys.argv[1])
         class_limit = int(sys.argv[2])
-        saved_model = sys.argv[3]
         video_path = sys.argv[4]
         image_height = int(sys.argv[5])
         image_width = int(sys.argv[6])
@@ -117,7 +116,7 @@ def main():
     image_shape = (image_height, image_width, 3)
 
     #extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
-    predict(data_type, seq_length, model, saved_model=saved_model,
+    predict(data_type, seq_length, model,  video_path, saved_model=saved_model,
           class_limit=class_limit, image_shape=image_shape,
           load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch)
 
