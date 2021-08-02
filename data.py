@@ -266,7 +266,7 @@ class DataSet():
         elif train_test == 'test':
             data = test
         else:
-            data = 'val'
+            data = val
 
         print("Returning array with all the classes")
         i = 0
