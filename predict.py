@@ -60,7 +60,6 @@ def predict(data_type, seq_length, model, video_path, saved_model=None,
     print(classes)
     print('filenames')
     print(filenames)
-    #TODO: check that they are in the same order (although they should be)
 
     # Format results and compute classification statistics
     dataset_name = 'THETIS'
@@ -72,14 +71,8 @@ def predict(data_type, seq_length, model, video_path, saved_model=None,
     accuracy, confusion_matrix, classification = results.compute(filenames, classes,predicted_labels)
     # Display and save results
     results.print(accuracy, confusion_matrix)
+    results.save(confusion_matrix, classification, predictions)
 
-    # if save:
-    #     results.save(confusion_matrix, classification, predictions)
-
-    # generator_predict_test = data.frame_generator_predict(1, 'test', data_type)
-    # prediction_test = rm.model.predict_generator(generator_predict_test)
-    # print('Predictions:')
-    # print(prediction_test)
 
 
 def main():
