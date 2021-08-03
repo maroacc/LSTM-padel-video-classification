@@ -242,11 +242,11 @@ class DataSet():
                     sequence = self.build_image_sequence(frames)
                 else:
                     # Get the sequence from disk.
-                    print("Get the sequence from disk")
+                    # print("Get the sequence from disk")
                     sequence = self.get_extracted_sequence(data_type, sample)
                     # print(f'data_type: {data_type}')
-                    #print(f'sample gen: {sample}')
-                    #print(f'sequence gen: {sequence}')
+                    # print(f'sample gen: {sample}')
+                    # print(f'sequence gen: {sequence}')
                     if sequence is None:
                         raise ValueError("Can't find sequence. Did you generate them?")
 
