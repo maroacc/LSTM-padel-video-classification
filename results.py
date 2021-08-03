@@ -77,7 +77,7 @@ class Results:
         print(confusion_df)
         print("\nAccuracy: ", accuracy)
 
-    def save(self, confusion_matrix: np.ndarray, classification: List[Tuple[str, str, str]], predictions: List[List[float]], saved_model):
+    def save(self, confusion_matrix: np.ndarray, classification: List[Tuple[str, str, str]], predictions: List[List[float]], saved_model, train_test):
         """Save results to an Excel file.
 
         Every argument is stored in its own sheet.
