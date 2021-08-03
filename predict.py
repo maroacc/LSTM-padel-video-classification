@@ -63,7 +63,8 @@ def predict(data_type, seq_length, model, video_path, saved_model=None,
 
     # Format results and compute classification statistics
     dataset_name = 'THETIS'
-    class_indices = {"backhand": 0, "forehand": 1}
+    #class_indices = {"backhand": 0, "forehand": 1}
+    class_indices = {"backhand": 0, "backhand2hands": 1, "backhand_slice": 2, "backhand_volley": 3, "flat_service": 4, "forehand_flat": 5, "forehand_openstands": 6, "forehand_slice": 7, "forehand_volley": 8, "kick_service": 9, "slice_service": 10, "smash": 11 }
     predicted_labels = np.argmax(prediction_train, axis=1).ravel().tolist()
     print('Predicted labels:')
     print(predicted_labels)
