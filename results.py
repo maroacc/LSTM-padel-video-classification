@@ -98,7 +98,7 @@ class Results:
         classification_df = pd.concat([classification_df, probabilities_df], axis=1)
 
         # Write to Excel
-        workbook = self._dataset_name.lower().replace(" ", "_") + '_' + saved_model.lower().split(".hdf5").replace(".", "_") if self._dataset_name else ""
+        workbook = self._dataset_name.lower().replace(" ", "_") + '_' + saved_model.lower().split(".hdf5")[0].replace(".", "_") if self._dataset_name else ""
         workbook += "results.xlsx"
 
         with pd.ExcelWriter(workbook) as writer:
