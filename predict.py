@@ -98,7 +98,7 @@ def main():
     nb_epoch = 1
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
-    train_test = 'test'
+    train_test = 'val'
 
     # extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
     predict(data_type, seq_length, model, video_path, saved_model=saved_model,
