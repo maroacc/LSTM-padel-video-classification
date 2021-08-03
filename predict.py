@@ -49,8 +49,8 @@ def predict(data_type, seq_length, model, video_path, saved_model=None,
     #Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
 
-    generator_predict_train = data.frame_generator_predict(1, 'test', data_type)
-    classes, filenames = data.get_classes_predict(1, 'test', data_type)
+    generator_predict_train = data.frame_generator_predict(1, 'train', data_type)
+    classes, filenames = data.get_classes_predict(1, 'train', data_type)
     # print('generator_predict_train:')
     # print(next(generator_predict_train))
     prediction_train = rm.model.predict_generator(generator_predict_train)
