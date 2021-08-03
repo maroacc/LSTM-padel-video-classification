@@ -72,7 +72,7 @@ def predict(data_type, seq_length, model, video_path, saved_model=None,
     accuracy, confusion_matrix, classification = results.compute(filenames, classes,predicted_labels)
     # Display and save results
     results.print(accuracy, confusion_matrix)
-    results.save(confusion_matrix, classification, predictions)
+    results.save(confusion_matrix, classification, prediction_train)
 
 
 
