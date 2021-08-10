@@ -23,7 +23,7 @@ def train(data_type, seq_length, model, saved_model=None,
     tb = TensorBoard(log_dir=os.path.join('/content/data', 'logs', model))
 
     # Helper: Stop when we stop learning.
-    early_stopper = EarlyStopping(patience=5, verbose = 1)
+    early_stopper = EarlyStopping(patience=5, verbose=1)
 
     # Helper: Save results.
     timestamp = time.time()
@@ -54,7 +54,7 @@ def train(data_type, seq_length, model, saved_model=None,
     else:
         # Get generators.
         generator = data.frame_generator(batch_size, 'train', data_type)
-        val_generator = data.frame_generator(batch_size, 'test', data_type)
+        val_generator = data.frame_generator(1, 'test', data_type)
 
     # Get the model.
     rm = ResearchModels(len(data.classes), model, seq_length, saved_model)
