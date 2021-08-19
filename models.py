@@ -4,7 +4,7 @@ A collection of models we'll use to attempt to classify videos.
 from keras.layers import Dense, Flatten, Dropout, ZeroPadding3D
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential, load_model
-from keras.optimizers import Adam, RMSprop
+from tensorflow.keras.optimizers import Adam, RMSprop
 from keras.layers.wrappers import TimeDistributed
 from keras.layers.convolutional import (Conv2D, MaxPooling3D, Conv3D,
     MaxPooling2D)
