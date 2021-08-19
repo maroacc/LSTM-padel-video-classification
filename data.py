@@ -282,8 +282,8 @@ class DataSet():
 
                 # Get a sample.
                 sample = data[i-1]
-                print(f'sample: {sample}')
-                print(f'class_one_hot: {np.where(self.get_class_one_hot(sample[1]) == 1)}')
+                # print(f'sample: {sample}')
+                # print(f'class_one_hot: {np.where(self.get_class_one_hot(sample[1]) == 1)}')
 
                 classes.append(np.where(self.get_class_one_hot(sample[1]) == 1))
                 filenames.append(sample[2])
