@@ -141,7 +141,7 @@ class DataSet():
 
             else:
                 sequence = self.get_extracted_sequence(data_type, row)
-                print(f'sequence: {sequence}')
+                # print(f'sequence: {sequence}')
 
                 if sequence is None:
                     print("Can't find sequence. Did you generate them?")
@@ -149,7 +149,7 @@ class DataSet():
 
             X.append(sequence)
             y.append(self.get_class_one_hot(row[1]))
-            print(np.array(X).astype(np.int))
+            # print(np.array(X).astype(np.int))
 
         return np.array(X).astype(np.int), np.array(y)
 
@@ -191,10 +191,10 @@ class DataSet():
                     #print("Get the sequence from disk")
                     sequence = self.get_extracted_sequence(data_type, sample)
                     # print(f'data_type: {data_type}')
-                    print(f'sample: {sample}')
-                    print(f'sequence: {sequence}')
+                    # print(f'sample: {sample}')
+                    # print(f'sequence: {sequence}')
                     if sequence is None:
-                        print("exiting while")
+                        # print("exiting while")
                         raise ValueError("Can't find sequence. Did you generate them?")
 
                 X.append(sequence)
@@ -368,8 +368,8 @@ class DataSet():
         """Given a prediction, print the top classes."""
         # Get the prediction for each label.
         label_predictions = {}
-        print("self.classes")
-        print(enumerate(self.classes))
+        # print("self.classes")
+        # print(enumerate(self.classes))
         for i, label in enumerate(self.classes):
             label_predictions[label] = predictions[i]
 
@@ -384,7 +384,7 @@ class DataSet():
         for i, class_prediction in enumerate(sorted_lps):
             if i > nb_to_return - 1 or class_prediction[1] == 0.0:
                 break
-            print("%s: %.2f" % (class_prediction[0], class_prediction[1]))
+            # print("%s: %.2f" % (class_prediction[0], class_prediction[1]))
             result.append("%s: %.2f" % (class_prediction[0], class_prediction[1]))
 
         return result
