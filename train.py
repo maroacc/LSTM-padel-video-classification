@@ -78,7 +78,7 @@ def train(data_type, seq_length, model, saved_model=None,
            verbose=1,
            callbacks=[tb, early_stopper, csv_logger, checkpointer],
            validation_data=val_generator,
-           validation_steps=None,
+           validation_steps=40,
            workers=4)
 
 def main():
