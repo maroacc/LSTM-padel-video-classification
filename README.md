@@ -1,7 +1,10 @@
-# Padel video using InceptionV3 + LSTM:
+# Padel video classification using InceptionV3 + LSTM:
 
 Padel video classification using a pretrained InceptionV3 base model + a LSTM architecture.
 This is a guide on how to execute it in Google Colab
+
+1. Download the THETIS RGB dataset from <http://thetis.image.ece.ntua.gr/>
+2. Execute the InceptionV3-LSTM.ipynb file
 
 1. Place the videos from your dataset in data/train and data/test folders. Each video type should have its own folder
 
