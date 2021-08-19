@@ -92,7 +92,7 @@ def main():
 
     # model can be only 'lstm'
     model = 'lstm'
-    saved_model = '/content/data/checkpoints/lstm-features.023-0.465.hdf5'  # None or weights file
+    saved_model = '/content/data/checkpoints/lstm-features.034-0.257.hdf5'  # None or weights file
     load_to_memory = False  # pre-load the sequences into memory
     batch_size = 1
     nb_epoch = 1
