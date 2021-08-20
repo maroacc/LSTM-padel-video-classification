@@ -19,9 +19,10 @@ else:
 capture = cv2.VideoCapture(os.path.join(video_file))
 width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)   # float
 height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT) # float
+video_name = video_name = video_file.split('/')[-1].split('.')[0]
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-video_writer = cv2.VideoWriter("result.avi", fourcc, 15, (int(width), int(height)))
+video_writer = cv2.VideoWriter(f"result-{video_name}.avi", fourcc, 15, (int(width), int(height)))
 
 # Get the dataset.
 data = DataSet(seq_length=seq_length, class_limit=class_limit, image_shape=(height, width, 3))
