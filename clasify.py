@@ -55,7 +55,7 @@ while True:
 
     # Clasify sequence
     prediction = saved_LSTM_model.predict(np.expand_dims(sequence, axis=0))
-    # print(prediction)
+    print(prediction)
     values = data.print_class_from_prediction(np.squeeze(prediction, axis=0))
 
     # Add prediction to frames and write them to new video
