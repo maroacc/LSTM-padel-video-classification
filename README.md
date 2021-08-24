@@ -10,7 +10,21 @@ This is a guide on how to execute it in Google Colab
 
 1. Download the THETIS RGB dataset from <http://thetis.image.ece.ntua.gr/>
 2. Upload the THETIS zipfile to Google Drive
-3. Open the InceptionV3-LSTM.ipynb file is Google Collab
+3. Execute the preprocessing_thetis_non_seq.ipynb notebook
+4. Execute the training_thetis_non_seq.ipynb notebook
+
+## Naive model:
+Tennis video classification using a pretrained InceptionV3 base model + calculating the average for each video.
+This is a guide on how to execute it in Google Colab
+
+Tennis video classification using a pretrained InceptionV3 base model + a LSTM architecture.
+This is a guide on how to execute it in Google Colab
+
+1. Download the THETIS RGB dataset from <http://thetis.image.ece.ntua.gr/>
+2. Upload the THETIS zipfile to Google Drive
+3. Execute the preprocessing_thetis_non_seq.ipynb notebook
+4. Execute the training_thetis_non_seq.ipynb to obtain the weights of the image classificator.
+5. Execute the naive_model.ipynb notebook
 
 ## Tennis video classification using InceptionV3 + LSTM:
 
@@ -63,6 +77,6 @@ This code requires you have Keras 2 and TensorFlow 1 or greater installed. Pleas
 
 You must also have `ffmpeg` installed in order to extract the video files.
 
-# Saved model
+# Saved models
 
-The weights of the model trained by us is too big to upload to Github. If you wish to use it contact us
+The weights of the models trained by us is too big to upload to Github. If you wish to use it contact us
