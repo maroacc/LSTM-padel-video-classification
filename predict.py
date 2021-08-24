@@ -74,10 +74,10 @@ def main():
         seq_length = int(sys.argv[1])
         class_limit = int(sys.argv[2])
         model_path = sys.argv[3]
-        dataset_path = sys.argv[4]
+        train_test = sys.argv[4]
     else:
-        print("Usage: python predict.py sequence_length class_limit model_path dataset_directory")
-        print("Example: python predict.py 75 2 lstm-features.039-1.283.hdf5 /example_dir 720 1280")
+        print("Usage: python predict.py sequence_length class_limit model_path train_test")
+        print("Example: python predict.py 75 2 content/data/checkpoints/lstm-features.039-1.283.hdf5 train")
         exit(1)
 
     sequences_dir = os.path.join('/content/drive/MyDrive/cnn/predict/data', 'sequences')
@@ -90,13 +90,12 @@ def main():
 
     # model can be only 'lstm'
     model = 'lstm'
-    saved_model = '/content/data/checkpoints/lstm-features.040-0.101.hdf5'  # None or weights file
+    saved_model = model_path  # None or weights file
     load_to_memory = False  # pre-load the sequences into memory
     batch_size = 1
     nb_epoch = 1
     data_type = 'features'
     image_shape = (image_height, image_width, 3)
-    train_test = 'val'
 
     extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
     predict(data_type, seq_length, model, video_path, saved_model=saved_model,
