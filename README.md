@@ -4,30 +4,31 @@ Padel video classification using a pretrained InceptionV3 base model + a LSTM ar
 This is a guide on how to execute it in Google Colab
 
 1. Download the THETIS RGB dataset from <http://thetis.image.ece.ntua.gr/>
-2. Execute the InceptionV3-LSTM.ipynb file
+2. Upload the THETIS zipfile to Google Drive
+3. Open the InceptionV3-LSTM.ipynb file is Google Collab
+4. Unzip the dataset
+6. Place the videos from the dataset in content/data/train and content/data/test folders. Each video type should have its own folder
 
-1. Place the videos from your dataset in data/train and data/test folders. Each video type should have its own folder
-
->	| data/test
-> >		| Football
-> >		| Commercial
-> >		...
 >	| data/train
-> >		| Football
-> >		| Commertial
+> >		| Forehand
+> >		| Backhand
+> >		...
+>	| data/test
+> >		| Forehand
+> >		| Backhand
 > >		...
 
-2. Extract files from video with script extract_files.py. Pass video files extenssion as a param
+7. Extract files from video with script extract_files.py. Pass video files extenssion as a param
 
 `	$ python extract_files.py mp4`
 
-3. Check the data_file.csv and choose the acceptable sequence length of frames. It should be less or equal to lowest one if you want to process all videos in dataset.
-4. Extract sequence for each video with InceptionV3 and train LSTM. Run train.py script with sequence_length, class_limit, image_height, image_width args
+8. Check the data_file.csv and choose the acceptable sequence length of frames. It should be less or equal to lowest one if you want to process all videos in dataset.
+9. Extract sequence for each video with InceptionV3 and train LSTM. Run train.py script with sequence_length, class_limit, image_height, image_width args
 
 `	$ python train.py 75 2 720 1280`
 
-5. Save your best model file. (For example, lstm-features.hdf5)
-6. Use clasify.py script to clasify your video. Args sequence_length, class_limit, saved_model_file, video_filename
+10. Save your best model file. (For example, lstm-features.hdf5)
+11. Use clasify.py script to clasify your video. Args sequence_length, class_limit, saved_model_file, video_filename
 
 `	$ python clasify.py 75 2 lstm-features.hdf5 video_file.mp4`
 
