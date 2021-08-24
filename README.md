@@ -1,13 +1,27 @@
-# Padel video classification using InceptionV3 + LSTM:
+# Padel Video Classification
+Although the aim of this proyect is to be able to clasify padel tennis videos, since there is no publicly available padel tennis dataset to this day, the models are trained with the THETIS dataset and then applied to padel tennis videos. 
 
-Padel video classification using a pretrained InceptionV3 base model + a LSTM architecture.
+## Tennis image classification using InceptionV3:
+Tennis image classification using a pretrained InceptionV3 base model.
+This is a guide on how to execute it in Google Colab
+
+Tennis video classification using a pretrained InceptionV3 base model + a LSTM architecture.
+This is a guide on how to execute it in Google Colab
+
+1. Download the THETIS RGB dataset from <http://thetis.image.ece.ntua.gr/>
+2. Upload the THETIS zipfile to Google Drive
+3. Open the InceptionV3-LSTM.ipynb file is Google Collab
+
+## Tennis video classification using InceptionV3 + LSTM:
+
+Tennis video classification using a pretrained InceptionV3 base model + a LSTM architecture.
 This is a guide on how to execute it in Google Colab
 
 1. Download the THETIS RGB dataset from <http://thetis.image.ece.ntua.gr/>
 2. Upload the THETIS zipfile to Google Drive
 3. Open the InceptionV3-LSTM.ipynb file is Google Collab
 4. Unzip the dataset
-6. Place the videos from the dataset in content/data/train and content/data/test folders. Each video type should have its own folder
+5. Place the videos from the dataset in content/data/train and content/data/test folders. Each video type should have its own folder
 
 >	| data/train
 > >		| Forehand
@@ -18,6 +32,7 @@ This is a guide on how to execute it in Google Colab
 > >		| Backhand
 > >		...
 
+6. Clone the Github repository into Google Colab
 7. Extract files from video with script extract_files.py. Pass video files extenssion as a param
 
 `	$ python extract_files.py mp4`
@@ -38,7 +53,7 @@ This is a guide on how to execute it in Google Colab
 
 The result will be placed in result.avi file.
 
-## Requirements
+# Requirements
 
 Ignore if you are using Google Colab
 
@@ -48,6 +63,6 @@ This code requires you have Keras 2 and TensorFlow 1 or greater installed. Pleas
 
 You must also have `ffmpeg` installed in order to extract the video files.
 
-## Saved model
+# Saved model
 
 The weights of the model trained by us is too big to upload to Github. If you wish to use it contact us
