@@ -47,3 +47,7 @@ This code requires you have Keras 2 and TensorFlow 1 or greater installed. Pleas
 `pip install -r requirements.txt`
 
 You must also have `ffmpeg` installed in order to extract the video files.
+
+## Saved model
+
+The weights of the model trained by us is too big to upload to Github. If you wish to use it contact us
