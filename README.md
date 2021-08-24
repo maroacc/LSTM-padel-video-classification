@@ -22,10 +22,10 @@ This is a guide on how to execute it in Google Colab
 
 `	$ python extract_files.py mp4`
 
-8. Check the data_file.csv and choose the acceptable sequence length of frames. It should be less or equal to lowest one if you want to process all videos in dataset.
+8. Check the data_file.csv and choose the acceptable sequence length of frames. It should be less or equal to lowest one if you want to process all videos in dataset. We recommend a length of 43 frames (avg -2*std).
 9. Extract sequence for each video with InceptionV3 and train LSTM. Run train.py script with sequence_length, class_limit, image_height, image_width args
 
-`	$ python train.py 75 2 720 1280`
+`	$ python predict.py 43 2 480 640`
 
 10. Save your best model file. (For example, lstm-features.hdf5)
 11. Evaluate your model using predict.py. It will generate an .xlsx with the confusion matrix and the predictions for each video.
