@@ -70,15 +70,13 @@ def main():
     """These are the main predicting settings. Set each before running
     this file."""
 
-    if (len(sys.argv) == 7):
+    if (len(sys.argv) == 5):
         seq_length = int(sys.argv[1])
         class_limit = int(sys.argv[2])
-        video_path = sys.argv[4]
-        image_height = int(sys.argv[5])
-        image_width = int(sys.argv[6])
+        model_path = sys.argv[3]
+        dataset_path = sys.argv[4]
     else:
-        print("Usage: python predict.py sequence_length class_limit saved_model_name video_directory")
-        # TODO: how do you specify the dir ?
+        print("Usage: python predict.py sequence_length class_limit model_path dataset_directory")
         print("Example: python predict.py 75 2 lstm-features.039-1.283.hdf5 /example_dir 720 1280")
         exit(1)
 
@@ -100,7 +98,7 @@ def main():
     image_shape = (image_height, image_width, 3)
     train_test = 'val'
 
-    # extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
+    extract_features(seq_length=seq_length, class_limit=class_limit, image_shape=image_shape, predict=True)
     predict(data_type, seq_length, model, video_path, saved_model=saved_model,
             class_limit=class_limit, image_shape=image_shape,
             load_to_memory=load_to_memory, batch_size=batch_size, nb_epoch=nb_epoch, train_test=train_test)
