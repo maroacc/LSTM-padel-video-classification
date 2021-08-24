@@ -28,13 +28,19 @@ This is a guide on how to execute it in Google Colab
 `	$ python train.py 75 2 720 1280`
 
 10. Save your best model file. (For example, lstm-features.hdf5)
-11. Use clasify.py script to clasify your video. Args sequence_length, class_limit, saved_model_file, video_filename
+11. Evaluate your model using predict.py. It will generate an .xlsx with the confusion matrix and the predictions for each video.
+
+`	$ python train.py 75 2 720 1280`
+
+12. Use clasify.py script to clasify your video. Args sequence_length, class_limit, saved_model_file, video_filename
 
 `	$ python clasify.py 75 2 lstm-features.hdf5 video_file.mp4`
 
 The result will be placed in result.avi file.
 
 ## Requirements
+
+Ignore if you are using Google Colab
 
 This code requires you have Keras 2 and TensorFlow 1 or greater installed. Please see the `requirements.txt` file. To ensure you're up to date, run:
 
